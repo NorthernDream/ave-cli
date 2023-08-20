@@ -70,7 +70,7 @@ ave init 或者 ave init [templateName] [yourProjectName]
 
 
 ## 贡献者们
-- BigSharkLx
+- NorthernDream
 
 ## 维护者
 
