@@ -1,0 +1,84 @@
+const inquirer = require("inquirer");
+const commander = require("commander");
+const chalk = require("chalk");
+const ora = require("ora");
+const downloadGitRepo = require("download-git-repo");
+const tplJson = require(`${__dirname}/../template`);
+
+commander.parse(process.argv);
+
+let templateName = "";
+let projectName = "";
+
+let question = [
+  {
+    name: "projectName",
+    type: "input",
+    message: "请输入项目名称",
+    validate(val) {
+      if (val === "") return "The projectName is required!";
+      return true;
+    }
+  }
+];
+
+const promptList = [
+  {
+    type: "list",
+    message: "请选择一个模板:",
+    name: "templateName",
+    choices: Object.keys(tplJson),
+    validate(val) {
+      if (val === "") {
+        return "请先创建模板";
+      }
+    }
+  }
+];
+
+if (commander.args.length < 1) {
+  inquirer
+    .prompt(promptList)
+    .then((answers) => {
+      templateName = answers.templateName;
+    })
+    .then(() => {
+      inquirer.prompt(question).then((answers) => {
+        projectName = answers.projectName;
+        startProject();
+      });
+    });
+} else {
+  templateName = program.args[0];
+  projectName = program.args[1];
+  // 校验参数
+  if (!tplJson[templateName]) {
+    console.log(chalk.red("\n Template does not exit! \n "));
+    return;
+  }
+  if (!projectName) {
+    console.log(chalk.red("\n The projectName is required! \n "));
+    return;
+  }
+  startProject();
+}
+
+const startProject = () => {
+  url = tplJson[templateName];
+  console.log(chalk.white("\n Start generating... \n"));
+  // 出现加载图标
+  const spinner = ora("Downloading...");
+  spinner.start();
+  downloadGitRepo(url, projectName, (err) => {
+    if (err) {
+      spinner.fail();
+      console.log(chalk.red(`Generation failed. ${err}`));
+      return;
+    }
+    spinner.succeed();
+    console.log(chalk.green("\n Generation completed!"));
+    console.log("\n To get started");
+    console.log(`\n    cd ${projectName} \n`);
+    process.exit();
+  });
+};

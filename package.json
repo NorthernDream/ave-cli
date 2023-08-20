@@ -1,0 +1,38 @@
+{
+  "name": "ave-cli",
+  "version": "1.0.0",
+  "description": "个人配置前端脚手架工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "ave",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NorthernDream/ave-cli.git"
+  },
+  "bin": {
+    "ave": "bin/ave",
+    "ave-add": "bin/ave-add",
+    "ave-delete": "bin/ave-delete",
+    "ave-list": "bin/ave-list",
+    "ave-init": "bin/ave-init"
+  },
+  "author": "NorthernDream",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NorthernDream/ave-cli/issues"
+  },
+  "homepage": "https://github.com/NorthernDream/ave-cli#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.2",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^7.0.0",
+    "ora": "^4.0.2"
+  }
+}

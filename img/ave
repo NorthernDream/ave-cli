@@ -1,0 +1,15 @@
+const commander = require("commander");
+
+// 定义当前版本
+// 定义使用方法
+// 定义四个指令
+commander.program
+  .version(require("../package").version)
+  .usage("<command> [options]")
+  .commander("add", "add a new template")
+  .commander("delete", "delete a new template")
+  .commander("list", "list all the template")
+  .commander("init", "generate a new project from a template");
+
+// 解析命令行参数
+commander.program(process.argv);
